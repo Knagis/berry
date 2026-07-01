@@ -9,7 +9,8 @@ import {ZipOpenFS}                                                          from
 import {buildNodeModulesTree, buildPackageMap}                              from '@yarnpkg/nm';
 import {NodeModulesLocatorMap, buildLocatorMap, NodeModulesHoistingLimits}  from '@yarnpkg/nm';
 import {parseSyml}                                                          from '@yarnpkg/parsers';
-import {NodePackageMapType, jsInstallUtils}                                 from '@yarnpkg/plugin-pnp';
+import {extractBuildRequest, hasBindingGyp}                                 from '@yarnpkg/plugin-pnp/jsInstallUtils';
+import {NodePackageMapType}                                                 from '@yarnpkg/plugin-pnp';
 import {PnpApi, PackageInformation}                                         from '@yarnpkg/pnp';
 import cmdShim                                                              from '@zkochan/cmd-shim';
 import {UsageError}                                                         from 'clipanion';
@@ -341,7 +342,7 @@ class NodeModulesInstaller implements Installer {
 
     const packageMap = buildPackageMap(tree, {
       basePath: ppath.join(this.opts.project.cwd, NODE_MODULES),
-      pnp: this.opts.project.configuration.get(`nodePackageMapType`) === NodePackageMapType.STANDARD
+      pnp: this.opts.project.configuration.get(`nodePackageMapType`) === (`standard` satisfies NodePackageMapType.STANDARD)
         ? pnpApi
         : null,
     });
@@ -377,7 +378,7 @@ class NodeModulesInstaller implements Installer {
       if (this.opts.project.tryWorkspaceByLocator(slot.pkg))
         continue;
 
-      const buildRequest = jsInstallUtils.extractBuildRequest(slot.pkg, slot.customPackageData, slot.dependencyMeta, {configuration: this.opts.project.configuration});
+      const buildRequest = extractBuildRequest(slot.pkg, slot.customPackageData, slot.dependencyMeta, {configuration: this.opts.project.configuration});
       if (!buildRequest)
         continue;
 
@@ -416,7 +417,7 @@ async function extractCustomPackageData(pkg: Package, fetchResult: FetchResult) 
       scripts: manifest.scripts,
     },
     misc: {
-      hasBindingGyp: jsInstallUtils.hasBindingGyp(fetchResult),
+      hasBindingGyp: hasBindingGyp(fetchResult),
     },
   };
 }

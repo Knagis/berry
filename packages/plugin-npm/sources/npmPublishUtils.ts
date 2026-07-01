@@ -5,7 +5,8 @@ import {packUtils}                from '@yarnpkg/plugin-pack';
 import ssri, {type Integrity}     from 'ssri';
 
 import {normalizeRegistry}        from './npmConfigUtils';
-import {generateProvenance}       from './npmProvenance';
+
+//import {generateProvenance}       from './npmProvenance';
 
 type PublishAdditionalParams = {
   access: string | undefined;
@@ -47,6 +48,7 @@ export async function makePublishBody(workspace: Workspace, buffer: Buffer, {acc
 
   // Adapted from https://github.com/npm/cli/blob/04f53ce13201b460123067d7153f1681342548e1/workspaces/libnpmpublish/lib/publish.js#L138
   if (provenance) {
+    throw new Error(`provenance not supported`);
     const subject = {
       // Adapted from https://github.com/npm/npm-package-arg/blob/fbbf22ef99ece449428fee761ae8950c08bc2cbf/lib/npa.js#L118
       name: `pkg:npm/${name.replace(/^@/, `%40`)}@${version}`,

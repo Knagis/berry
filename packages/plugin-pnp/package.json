@@ -5,6 +5,7 @@
   "main": "./sources/index.ts",
   "exports": {
     ".": "./sources/index.ts",
+    "./jsInstallUtils": "./sources/jsInstallUtils.ts",
     "./package.json": "./package.json"
   },
   "dependencies": {

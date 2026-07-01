@@ -115,39 +115,39 @@ const plugin: Plugin<CoreHooks & StageHooks> = {
     setupScriptEnvironment,
   },
   configuration: {
-    nodeLinker: {
-      description: `The linker used for installing Node packages, one of: "pnp", "pnpm", or "node-modules"`,
-      type: SettingsType.STRING,
-      default: `pnp`,
-    },
+    // nodeLinker: {
+    //   description: `The linker used for installing Node packages, one of: "pnp", "pnpm", or "node-modules"`,
+    //   type: SettingsType.STRING,
+    //   default: `pnp`,
+    // },
     nodeExperimentalPackageMap: {
       description: `If true, Yarn will inject the experimental package map into Node.js processes when using the node-modules or pnpm linkers.`,
       type: SettingsType.BOOLEAN,
       default: false,
     },
-    nodePackageMapType: {
-      description: `If 'standard', package maps will reflect the dependency graph. If 'loose', they will reflect the hoisted node_modules layout.`,
-      type: SettingsType.STRING,
-      values: [
-        NodePackageMapType.STANDARD,
-        NodePackageMapType.LOOSE,
-      ],
-      default: NodePackageMapType.STANDARD,
-    },
+    // nodePackageMapType: {
+    //   description: `If 'standard', package maps will reflect the dependency graph. If 'loose', they will reflect the hoisted node_modules layout.`,
+    //   type: SettingsType.STRING,
+    //   values: [
+    //     NodePackageMapType.STANDARD,
+    //     NodePackageMapType.LOOSE,
+    //   ],
+    //   default: NodePackageMapType.STANDARD,
+    // },
     minizip: {
       description: `Whether Yarn should use minizip to extract archives`,
       type: SettingsType.BOOLEAN,
       default: false,
     },
-    winLinkType: {
-      description: `Whether Yarn should use Windows Junctions or symlinks when creating links on Windows.`,
-      type: SettingsType.STRING,
-      values: [
-        WindowsLinkType.JUNCTIONS,
-        WindowsLinkType.SYMLINKS,
-      ],
-      default: WindowsLinkType.JUNCTIONS,
-    },
+    // winLinkType: {
+    //   description: `Whether Yarn should use Windows Junctions or symlinks when creating links on Windows.`,
+    //   type: SettingsType.STRING,
+    //   values: [
+    //     WindowsLinkType.JUNCTIONS,
+    //     WindowsLinkType.SYMLINKS,
+    //   ],
+    //   default: WindowsLinkType.JUNCTIONS,
+    // },
     pnpMode: {
       description: `If 'strict', generates standard PnP maps. If 'loose', merges them with the n_m resolution.`,
       type: SettingsType.STRING,
